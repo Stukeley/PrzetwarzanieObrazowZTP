@@ -2,18 +2,20 @@
 @model PrzetwarzanieObrazow.Web.Pages.ImageForm
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Formularz przesyłania obrazów";
 }
 
-<!DOCTYPE html>
+<form action="../Pages/ImageForm.cshtml.cs/Process" method="POST" enctype="multipart/form-data">
+    <label for="inputImage">Select an image file:</label>
+    <input type="file" id="inputImage" name="InputImage" required>
 
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<div>
-    
-</div>
-</body>
-</html>
+    <label for="width">Enter the width:</label>
+    <input type="number" id="width" name="Width" required>
+
+    <label for="height">Enter the height:</label>
+    <input type="number" id="height" name="Height" required>
+
+    <button type="submit">Process Image</button>
+</form>
+
+<label id="resultLabel"></label>
