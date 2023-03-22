@@ -1,14 +1,16 @@
-using PrzetwarzanieObrazow.API.Controllers;
+using Ocelot.DependencyInjection;
+using Ocelot.Middleware;
+
+// https://www.c-sharpcorner.com/blogs/api-gateway-in-net-60-using-ocelot
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 // API Gateway.
-builder.Services.AddSingleton<ApiGatewayController>();
+builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
+builder.Services.AddOcelot(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -26,20 +28,8 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.Use(async (context, next) =>
-{
-	var apiGatewayController = context.RequestServices.GetService<ApiGatewayController>();
-
-	var response = await apiGatewayController.Get(context.Request.RouteValues["microserviceName"].ToString(),
-		context.Request.Path.Value.Substring(context.Request.Path.Value.IndexOf('/') + 1) + context.Request.QueryString);
-
-	var content = await response.Content.ReadAsStreamAsync();
-	// ?
-	// await context.Response.Body.WriteAsync(content.ToArray());
-
-	await next(context);
-});
-
 app.MapControllers();
+
+await app.UseOcelot();
 
 app.Run();
