@@ -12,4 +12,10 @@ public class AlgorithmsController: ControllerBase
 	{
 		return Ok("Test");
 	}
+
+	[HttpGet]
+	public IActionResult GetAll()
+	{
+		return Ok("GetALl");
+	}
 }

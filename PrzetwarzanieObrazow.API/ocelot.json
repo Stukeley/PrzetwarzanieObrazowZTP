@@ -6,7 +6,7 @@
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "localhost",
-					"Port": 7141
+					"Port": 5089
 				}
 			],
 			"UpstreamPathTemplate": "/gateway/algorithms/grayscale",
@@ -18,7 +18,7 @@
 			"DownstreamHostAndPorts": [
 				{
 					"Host": "localhost",
-					"Port": 7141
+					"Port": 5089
 				}
 			],
 			"UpstreamPathTemplate": "/gateway/algorithms/highpass",
