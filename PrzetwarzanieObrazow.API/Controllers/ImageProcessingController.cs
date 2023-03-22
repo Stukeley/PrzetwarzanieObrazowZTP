@@ -1,14 +1,13 @@
-namespace PrzetwarzanieObrazow.Web.API;
+namespace PrzetwarzanieObrazow.API.Controllers;
 
 using Code.Algorithms;
 using Code.Builders;
 using Microsoft.AspNetCore.Mvc;
-using Requests;
 
 public class ImageProcessingController : ControllerBase
 {
 	[HttpPost(Name = "HighPassFilter")]
-	public IActionResult HighPassFilter([FromForm]ImageProcessingRequest request)
+	public IActionResult HighPassFilter([FromForm]object request)
 	{
 		// TODO
 		ImageAlgorithm highPassFilter = new ImageFilterBuilder().BuildHighPassFilterAlgorithm(null);

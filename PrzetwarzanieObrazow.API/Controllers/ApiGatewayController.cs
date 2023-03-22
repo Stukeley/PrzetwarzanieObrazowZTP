@@ -1,4 +1,4 @@
-﻿namespace PrzetwarzanieObrazow.Web.API;
+﻿namespace PrzetwarzanieObrazow.API.Controllers;
 
 using System.Net.Http;
 using System.Net.Http.Json;
