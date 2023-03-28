@@ -3,10 +3,10 @@
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>disable</Nullable>
+        <NoWarn>CA1416</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Ocelot" Version="18.0.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     </ItemGroup>
 

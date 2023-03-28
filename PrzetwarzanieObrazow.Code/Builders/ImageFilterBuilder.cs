@@ -2,7 +2,6 @@
 
 using System.Drawing;
 using Algorithms;
-using Helpers;
 using Models;
 
 /// <summary>
@@ -13,9 +12,7 @@ public class ImageFilterBuilder
 {
 	public ImageAlgorithm BuildHighPassFilterAlgorithm(Bitmap inputImage)
 	{
-		var pixels = ByteArrayToPixels.ConvertByteArrayToPixels(inputImage);
-		
-		var highPassFilter = new HighPassFilter(pixels, inputImage.Width, inputImage.Height);
+		var highPassFilter = new HighPassFilter(inputImage, inputImage.Width, inputImage.Height);
 		highPassFilter.Mask = new HighPassImageMask();
 		
 		return highPassFilter;
@@ -23,9 +20,7 @@ public class ImageFilterBuilder
 	
 	public ImageAlgorithm BuildGrayscaleFilterAlgorithm(Bitmap inputImage)
 	{
-		var pixels = ByteArrayToPixels.ConvertByteArrayToPixels(inputImage);
-		
-		var grayscaleFilter = new GrayscaleFilter(pixels, inputImage.Width, inputImage.Height);
+		var grayscaleFilter = new GrayscaleFilter(inputImage, inputImage.Width, inputImage.Height);
 		grayscaleFilter.Mask = null;
 		
 		return grayscaleFilter;

@@ -1,5 +1,6 @@
 ﻿namespace PrzetwarzanieObrazow.Code.Algorithms;
 
+using System.Drawing;
 using Interfaces;
 using Models;
 
@@ -9,23 +10,23 @@ using Models;
 /// </summary>
 public abstract class ImageAlgorithm
 {
-	public Pixel[] InputImage { get; set; }
+	public Bitmap InputImage { get; set; }
 	public int Width { get; set; }
 	public int Height { get; set; }
 	
-	public Pixel[] OutputImage { get; set; }
+	public Bitmap OutputImage { get; set; }
 	
-	// Will be null for algorithms that don't use mask.
+	// Na ten moment nie używane. Będzie null dla algorytmów, które nie korzystają z maski.
 	public IAlgorithmMask Mask { get; set; }
 
-	public abstract Pixel[] Process();
+	public abstract Bitmap Process();
 
-	public ImageAlgorithm(Pixel[] inputImage, int width, int height)
+	public ImageAlgorithm(Bitmap inputImage, int width, int height)
 	{
 		InputImage = inputImage;
 		Width = width;
 		Height = height;
 		
-		OutputImage = new Pixel[width*height];
+		OutputImage = new Bitmap(Width, Height);
 	}
 }

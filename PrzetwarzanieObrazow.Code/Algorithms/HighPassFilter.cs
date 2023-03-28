@@ -1,18 +1,18 @@
 ﻿namespace PrzetwarzanieObrazow.Code.Algorithms;
 
-using Models;
+using System.Drawing;
 
 /// <summary>
 /// Algorytm nakładający na obraz filtr górnoprzepustowy (high pass filter).
-/// Maska filtru (3x3): { 0, -1, 0, -1, 5, -1, 0, -1, 0 }.
+/// Wersja nieoptymalna.
 /// </summary>
 public class HighPassFilter : ImageAlgorithm
 {
-	public HighPassFilter(Pixel[] inputImage, int width, int height) : base(inputImage, width, height)
+	public HighPassFilter(Bitmap inputImage, int width, int height) : base(inputImage, width, height)
 	{
 	}
 
-	public override Pixel[] Process()
+	public override Bitmap Process()
 	{
 		// Implement high pass image filter on InputImage and save result in OutputImage.
 		// You can use Width and Height to get image dimensions.
@@ -24,7 +24,7 @@ public class HighPassFilter : ImageAlgorithm
 			{
 				if (i == 0 || j == 0 || i == Width - 1 || j == Height - 1)
 				{
-					OutputImage[i + j * Width] = pixels[i + j * Width];
+					OutputImage.SetPixel(i,j, pixels.GetPixel(i,j));
 					continue;
 				}
 
@@ -34,7 +34,7 @@ public class HighPassFilter : ImageAlgorithm
 				{
 					for (int y = -1; y <= 1; y++)
 					{
-						var pixel = pixels[(i + x) + (j + y) * Width];
+						var pixel = pixels.GetPixel(i + x, j + y);
 						r += pixel.R;
 						g += pixel.G;
 						b += pixel.B;
@@ -45,7 +45,7 @@ public class HighPassFilter : ImageAlgorithm
 				g /= 1;
 				b /= 1;
 				
-				OutputImage[i + j * Width] = new Pixel((byte)r, (byte)g, (byte)b);
+				OutputImage.SetPixel(i, j, Color.FromArgb(r, g, b));
 			}
 		}
 

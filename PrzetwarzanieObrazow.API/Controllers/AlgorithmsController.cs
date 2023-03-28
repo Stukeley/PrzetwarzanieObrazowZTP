@@ -1,21 +1,23 @@
 ﻿namespace PrzetwarzanieObrazow.API.Controllers;
 
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-[Route("api/[controller]")]
+[Route("api/algorithms")]
 [ApiController]
 public class AlgorithmsController: ControllerBase
 {
 	[HttpGet]
 	[Route("highpass")]
-	public IActionResult Test()
+	public async Task<IActionResult> Highpass()
 	{
-		return Ok("Test");
+		return Ok("Highpass");
 	}
-
+	
 	[HttpGet]
-	public IActionResult GetAll()
+	[Route("grayscale")]
+	public async Task<IActionResult> Grayscale()
 	{
-		return Ok("GetALl");
+		return Ok("Grayscale");
 	}
 }

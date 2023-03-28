@@ -2,6 +2,7 @@
 
 /// <summary>
 /// Struktura reprezentująca piksel z kolorami RGB.
+/// Będzie wykorzystywana w przyszłości zamiast korzystania z Bitmap.
 /// </summary>
 public struct Pixel
 {
