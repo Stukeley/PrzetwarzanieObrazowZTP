@@ -1,9 +1,6 @@
-Aktualizacja 22.03.2023:
+Aktualizacja 29.03.2023:
 
-- Wydzielenie projektu odpowiedzialnego za API
-- Zaimplementowanie szkieletu wzorca projektowego API Gateway
-- Zaimplementowanie wstępnych (mało optymalnych) wersji algorytmów: skala szarości, filtr górnoprzepustowy
-- Stworzenie testowego kontrolera API
-- Projekt Web będzie teraz odpowiadał tylko za interfejs użytkownika (webowy)
-- Projekt Api odpowiada za komunikację pomiędzy użytkownikiem a aplikacją i udostępnia metody tej komunikacji
-- Projekt Code zawiera poszczególne algorytmy i logikę projektu
+- Poprawienie działania projektu odpowiedzialnego za API - projekt teraz działa
+- Zmieniono podejście do implementacji API Gateway, zaimplementowano działającą formę wzorca projektowego
+- Poprawienie działania algorytmów (celowo nieoptymalnych)
+- Celem najbliższych działań jest umożliwienie przesyłu danych (obrazu) z projektu webowego (UI) do projektu API, który wywołuje odpowiednie metody - algorytmy

@@ -11,6 +11,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\PrzetwarzanieObrazow.Code\PrzetwarzanieObrazow.Code.csproj" />
+      <ProjectReference Include="..\PrzetwarzanieObrazow.DTOs\PrzetwarzanieObrazow.DTOs.csproj" />
     </ItemGroup>
 
 </Project>

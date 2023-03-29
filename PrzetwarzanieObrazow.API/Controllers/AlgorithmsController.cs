@@ -1,6 +1,7 @@
 ﻿namespace PrzetwarzanieObrazow.API.Controllers;
 
 using System.Threading.Tasks;
+using DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 [Route("api/algorithms")]
@@ -9,7 +10,7 @@ public class AlgorithmsController: ControllerBase
 {
 	[HttpGet]
 	[Route("highpass")]
-	public async Task<IActionResult> Highpass()
+	public async Task<IActionResult> Highpass([FromBody]ImageDataObject obj)
 	{
 		return Ok("Highpass");
 	}

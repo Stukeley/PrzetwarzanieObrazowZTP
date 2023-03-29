@@ -2,23 +2,56 @@
 
 namespace PrzetwarzanieObrazow.Web.Pages;
 
+using System;
+using System.Drawing;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text;
 using System.Threading.Tasks;
+using DTOs;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 public class ImageForm : PageModel
 {
-	// How to load file as Bitmap:
-	// https://blog.elmah.io/upload-and-resize-an-image-natively-with-asp-net-core/
-	public async Task Process(object req)
+	public async Task<IActionResult> OnPostAsync(IFormFile fileUpload)
 	{
-		// Hardcoded to HighPassImageFilter for now.
+		Bitmap bitmap;
+
+		using (var memoryStream = new MemoryStream())
+		{
+			await fileUpload.CopyToAsync(memoryStream);
+			byte[] fileBytes = memoryStream.ToArray();
+
+			// Strip off the PNG header (first 8 bytes)
+			// byte[] imageBytes = new byte[fileBytes.Length - 8];
+			// Array.Copy(fileBytes, 8, fileBytes, 0, fileBytes.Length);
+
+			bitmap = new Bitmap(new MemoryStream(fileBytes));
+		}
+
+		var dto = new ImageDataObject()
+		{
+			Width = bitmap.Width,
+			Height = bitmap.Height,
+			Algorithm = "highpass"
+		};
+		
+		using (var memoryStream = new MemoryStream())
+		{
+			bitmap.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Png);
+			dto.Data = memoryStream.ToArray();
+		}
+
 		using (var client = new HttpClient())
 		{
-			var response = await client.PostAsJsonAsync("https://localhost:7062/api/Processing/HighPassFilter", req);
+			// Send the DTO to the API.
+			var content = new StringContent(System.Text.Json.JsonSerializer.Serialize(dto));
+			var response = await client.PostAsJsonAsync("http://localhost:5089/api/gateway", content);
+			var result = response.Content.ToString();// TODO: parsować JSON-DTO
 			
-			// Display result.
-			// resultLabel.Text = response;
+			return RedirectToPage("Result", result);
 		}
 	}
 }
