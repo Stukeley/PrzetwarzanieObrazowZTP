@@ -1,7 +1,10 @@
 ﻿@page
-@model string
+@model PrzetwarzanieObrazow.DTOs.ImageDataObject
 
-<h1>Result</h1>
+<h1>Wynik algorytmu</h1>
 
 <p>The API returned the following result:</p>
-<p>@Model</p>
+<!-- TODO: pokazać cały result -->
+<p>Algorytm: @Model.Algorithm</p>
+<p>Szerokość: @Model.Width</p>
+<p>Wysokość: @Model.Height</p>

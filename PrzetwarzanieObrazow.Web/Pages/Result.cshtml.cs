@@ -2,12 +2,14 @@
 
 namespace PrzetwarzanieObrazow.Web.Pages;
 
+using DTOs;
+
 public class Result : PageModel
 {
-	public string ResultString { get; set; }
+	public ImageDataObject ImageResult { get; set; }
     
-	public void OnGet(string result)
+	public void OnGet(ImageDataObject result)
 	{
-		ResultString = result;
+		ImageResult = result;
 	}
 }

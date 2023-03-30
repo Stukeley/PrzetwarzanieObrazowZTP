@@ -49,9 +49,11 @@ public class ImageForm : PageModel
 			// Send the DTO to the API.
 			var content = new StringContent(System.Text.Json.JsonSerializer.Serialize(dto));
 			var response = await client.PostAsJsonAsync("http://localhost:5089/api/gateway", content);
-			var result = response.Content.ToString();// TODO: parsować JSON-DTO
 			
-			return RedirectToPage("Result", result);
+			var resultString = await response.Content.ReadAsStringAsync();
+			var resultParsed = System.Text.Json.JsonSerializer.Deserialize<ImageDataObject>(resultString);
+			
+			return RedirectToPage("Result", resultParsed);
 		}
 	}
 }

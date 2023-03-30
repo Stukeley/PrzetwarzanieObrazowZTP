@@ -1,6 +1,7 @@
 ﻿namespace PrzetwarzanieObrazow.API.Controllers;
 
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 using DTOs;
 using Microsoft.AspNetCore.Mvc;
@@ -19,9 +20,14 @@ public class GatewayController : ControllerBase
 		// Send an API request to /api/algorithms/highpass.
 		using (var client = new HttpClient())
 		{
-			var response = await client.GetAsync($"{Settings.ApplicationUrl}/api/algorithms/{algorithmName}");
-			string content = await response.Content.ReadAsStringAsync();
-			return Ok(content);
+			// TODO: requesty źle się wysyłają i nie działają poprawnie, a Postman tak
+			var content = new StringContent(System.Text.Json.JsonSerializer.Serialize(obj));
+			
+			var response = await client.PostAsJsonAsync($"{Settings.ApplicationUrl}/api/algorithms/{algorithmName}", content);
+			
+			string result = await response.Content.ReadAsStringAsync();
+			
+			return Ok(result);
 		}
 	}
 }

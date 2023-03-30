@@ -45,7 +45,7 @@ public class HighPassFilter : ImageAlgorithm
 				g /= 1;
 				b /= 1;
 				
-				OutputImage.SetPixel(i, j, Color.FromArgb(r, g, b));
+				OutputImage.SetPixel(i, j, Color.FromArgb((byte)r, (byte)g, (byte)b));
 			}
 		}
 
