@@ -83,6 +83,24 @@ public class AlgorithmsController : ControllerBase
 
 		return Ok(outputString);
 	}
+	
+	[HttpPost]
+	[Route("laplace")]
+	public async Task<IActionResult> Laplace([FromBody] ImageDataObject obj)
+	{
+		if (obj?.Data == null)
+		{
+			return NoContent();
+		}
+
+		var bitmap = ImageDataToBitmap.ConvertImageDataToBitmap(obj);
+		var grayscaleAlgorithm = new ImageFilterBuilder().BuildLaplaceFilterAlgorithm(bitmap);
+		var output = grayscaleAlgorithm.Process();
+		
+		string outputString = await ConvertAndReturnOutput(output, obj.Algorithm, output.Width, output.Height);
+
+		return Ok(outputString);
+	}
 
 	private static async Task<string> ConvertAndReturnOutput(Bitmap outputBitmap, string algorithm, int width, int height)
 	{

@@ -41,4 +41,12 @@ public class ImageFilterBuilder
 		
 		return contrastChange;
 	}
+	
+	public ImageAlgorithm BuildLaplaceFilterAlgorithm(Bitmap inputImage)
+	{
+		var laplaceFilter = new LaplaceFilter(inputImage, inputImage.Width, inputImage.Height);
+		laplaceFilter.Mask = new LaplaceMask();
+		
+		return laplaceFilter;
+	}
 }
