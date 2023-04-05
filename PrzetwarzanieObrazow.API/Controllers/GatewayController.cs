@@ -16,8 +16,8 @@ public class GatewayController : ControllerBase
 	{
 		string algorithmName = obj.Algorithm;
 		
-		// Invoke highpass algorithm through the AlgorithmsController endpoints.
-		// Send an API request to /api/algorithms/highpass.
+		// Invoke the right algorithm through the AlgorithmsController endpoints.
+		// Send an API request to /api/algorithms/[algorithm name].
 		using (var client = new HttpClient())
 		{
 			var content = new StringContent(System.Text.Json.JsonSerializer.Serialize(obj), Encoding.UTF8, "application/json");

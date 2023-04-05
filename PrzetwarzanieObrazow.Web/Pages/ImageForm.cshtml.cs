@@ -25,11 +25,13 @@ public class ImageForm : PageModel
 			bitmap = new Bitmap(new MemoryStream(fileBytes));
 		}
 
+		string algorithm = Request.Form["algorithm"];
+
 		var dto = new ImageDataObject()
 		{
 			Width = bitmap.Width,
 			Height = bitmap.Height,
-			Algorithm = "highpass"
+			Algorithm = algorithm
 		};
 		
 		using (var memoryStream = new MemoryStream())
