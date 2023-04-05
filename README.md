@@ -1,6 +1,7 @@
-Aktualizacja 29.03.2023:
+Aktualizacja 5.04.2023:
 
-- Poprawienie działania projektu odpowiedzialnego za API - projekt teraz działa
-- Zmieniono podejście do implementacji API Gateway, zaimplementowano działającą formę wzorca projektowego
-- Poprawienie działania algorytmów (celowo nieoptymalnych)
-- Celem najbliższych działań jest umożliwienie przesyłu danych (obrazu) z projektu webowego (UI) do projektu API, który wywołuje odpowiednie metody - algorytmy
+- Poprawienie działania API
+- Naprawienie błędów związanych z przesyłaniem danych między aplikacją WEB a API
+- Dodano wyświetlanie wyniku na ekran
+- Dodano możliwość wyboru algorytmu w formularzu przez użytkownika
+- Poprawiono i dodano nowe algorytmy, m.in.: Filtr Laplace, zmiana jasności, zmiana kontrastu
