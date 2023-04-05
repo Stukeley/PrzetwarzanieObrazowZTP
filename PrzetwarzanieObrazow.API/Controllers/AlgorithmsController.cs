@@ -10,41 +10,77 @@ using Microsoft.AspNetCore.Mvc;
 
 [Route("api/algorithms")]
 [ApiController]
-public class AlgorithmsController: ControllerBase
+public class AlgorithmsController : ControllerBase
 {
 	[HttpPost]
 	[Route("highpass")]
-	public async Task<IActionResult> Highpass([FromBody]ImageDataObject obj)
+	public async Task<IActionResult> Highpass([FromBody] ImageDataObject obj)
 	{
 		if (obj?.Data == null)
 		{
 			return NoContent();
 		}
-		
+
 		var bitmap = ImageDataToBitmap.ConvertImageDataToBitmap(obj);
 		var highPassAlgorithm = new ImageFilterBuilder().BuildHighPassFilterAlgorithm(bitmap);
 		var output = highPassAlgorithm.Process();
 
 		string outputString = await ConvertAndReturnOutput(output, obj.Algorithm, output.Width, output.Height);
-		
+
 		return Ok(outputString);
 	}
-	
+
 	[HttpPost]
 	[Route("grayscale")]
-	public async Task<IActionResult> Grayscale([FromBody]ImageDataObject obj)
+	public async Task<IActionResult> Grayscale([FromBody] ImageDataObject obj)
 	{
 		if (obj?.Data == null)
 		{
 			return NoContent();
 		}
-		
+
 		var bitmap = ImageDataToBitmap.ConvertImageDataToBitmap(obj);
 		var grayscaleAlgorithm = new ImageFilterBuilder().BuildGrayscaleFilterAlgorithm(bitmap);
 		var output = grayscaleAlgorithm.Process();
 
 		string outputString = await ConvertAndReturnOutput(output, obj.Algorithm, output.Width, output.Height);
+
+		return Ok(outputString);
+	}
+
+	[HttpPost]
+	[Route("brightnesschange")]
+	public async Task<IActionResult> BrightnessChange([FromBody] ImageDataObject obj)
+	{
+		if (obj?.Data == null)
+		{
+			return NoContent();
+		}
+
+		var bitmap = ImageDataToBitmap.ConvertImageDataToBitmap(obj);
+		var grayscaleAlgorithm = new ImageFilterBuilder().BuildBrightnessChangeAlgorithm(bitmap);
+		var output = grayscaleAlgorithm.Process();
 		
+		string outputString = await ConvertAndReturnOutput(output, obj.Algorithm, output.Width, output.Height);
+
+		return Ok(outputString);
+	}
+	
+	[HttpPost]
+	[Route("contrastchange")]
+	public async Task<IActionResult> ConstrastChange([FromBody] ImageDataObject obj)
+	{
+		if (obj?.Data == null)
+		{
+			return NoContent();
+		}
+
+		var bitmap = ImageDataToBitmap.ConvertImageDataToBitmap(obj);
+		var grayscaleAlgorithm = new ImageFilterBuilder().BuildContrastChangeAlgorithm(bitmap);
+		var output = grayscaleAlgorithm.Process();
+		
+		string outputString = await ConvertAndReturnOutput(output, obj.Algorithm, output.Width, output.Height);
+
 		return Ok(outputString);
 	}
 

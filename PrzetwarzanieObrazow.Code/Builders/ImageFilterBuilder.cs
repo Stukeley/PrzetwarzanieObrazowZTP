@@ -25,4 +25,20 @@ public class ImageFilterBuilder
 		
 		return grayscaleFilter;
 	}
+
+	public ImageAlgorithm BuildBrightnessChangeAlgorithm(Bitmap inputImage)
+	{
+		var brightnessChange = new BrightnessChange(inputImage, inputImage.Width, inputImage.Height);
+		brightnessChange.Mask = null;
+		
+		return brightnessChange;
+	}
+	
+	public ImageAlgorithm BuildContrastChangeAlgorithm(Bitmap inputImage)
+	{
+		var contrastChange = new ContrastChange(inputImage, inputImage.Width, inputImage.Height);
+		contrastChange.Mask = null;
+		
+		return contrastChange;
+	}
 }
