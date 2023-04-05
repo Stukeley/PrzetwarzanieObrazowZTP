@@ -15,7 +15,7 @@ public class AlgorithmsController: ControllerBase
 	[Route("highpass")]
 	public async Task<IActionResult> Highpass([FromBody]ImageDataObject obj)
 	{
-		if (obj == null)
+		if (obj?.Data == null)
 		{
 			return NoContent();
 		}

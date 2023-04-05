@@ -24,10 +24,6 @@ public class ImageForm : PageModel
 			await fileUpload.CopyToAsync(memoryStream);
 			byte[] fileBytes = memoryStream.ToArray();
 
-			// Strip off the PNG header (first 8 bytes)
-			// byte[] imageBytes = new byte[fileBytes.Length - 8];
-			// Array.Copy(fileBytes, 8, fileBytes, 0, fileBytes.Length);
-
 			bitmap = new Bitmap(new MemoryStream(fileBytes));
 		}
 
@@ -47,13 +43,14 @@ public class ImageForm : PageModel
 		using (var client = new HttpClient())
 		{
 			// Send the DTO to the API.
-			var content = new StringContent(System.Text.Json.JsonSerializer.Serialize(dto));
-			var response = await client.PostAsJsonAsync("http://localhost:5089/api/gateway", content);
+			var content = new StringContent(System.Text.Json.JsonSerializer.Serialize(dto), Encoding.UTF8, "application/json");
+			var response = await client.PostAsync("http://localhost:5089/api/gateway", content);
 			
 			var resultString = await response.Content.ReadAsStringAsync();
 			var resultParsed = System.Text.Json.JsonSerializer.Deserialize<ImageDataObject>(resultString);
 			
-			return RedirectToPage("Result", resultParsed);
+			Result.ImageResult = resultParsed;
+			return Redirect("/result");
 		}
 	}
 }

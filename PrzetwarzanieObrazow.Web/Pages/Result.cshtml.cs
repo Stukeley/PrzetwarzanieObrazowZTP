@@ -6,10 +6,11 @@ using DTOs;
 
 public class Result : PageModel
 {
-	public ImageDataObject ImageResult { get; set; }
+	public static ImageDataObject ImageResult { get; set; }
+	public ImageDataObject CurrentImageResult { get; set; }
     
-	public void OnGet(ImageDataObject result)
+	public void OnGet()
 	{
-		ImageResult = result;
+		CurrentImageResult = ImageResult;
 	}
 }
