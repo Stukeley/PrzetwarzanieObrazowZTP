@@ -17,6 +17,7 @@ public abstract class ImageAlgorithm
 	public Bitmap OutputImage { get; set; }
 	
 	// Na ten moment nie używane. Będzie null dla algorytmów, które nie korzystają z maski.
+	// Będzie to przyszła optymalizacja działania algorytmów.
 	public IAlgorithmMask Mask { get; set; }
 
 	public abstract Bitmap Process();

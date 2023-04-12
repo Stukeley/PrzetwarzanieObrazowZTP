@@ -49,4 +49,12 @@ public class ImageFilterBuilder
 		
 		return laplaceFilter;
 	}
+
+	public ImageAlgorithm BuildImageToBinaryAlgorithm(Bitmap inputImage)
+	{
+		var imageToBinary = new ImageToBinary(inputImage, inputImage.Width, inputImage.Height);
+		imageToBinary.Mask = null;
+		
+		return imageToBinary;
+	}
 }

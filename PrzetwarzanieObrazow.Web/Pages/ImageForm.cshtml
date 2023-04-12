@@ -9,7 +9,8 @@
 
 <form method="post" enctype="multipart/form-data">
     <div>
-        <label for="fileUpload">Wybierz obraz PNG:</label>
+        <label for="fileUpload">Wybierz obraz PNG (na ten moment inne formaty nie są obsługiwane), typ filtru do nałożenia i prześlij obraz. Po chwili na ekranie zostanie wyświetlony wynik.</label>
+        <br/>
         <input type="file" id="fileUpload" name="fileUpload" accept="image/*" required>
         <br/>
         <select name="algorithm">
@@ -18,6 +19,7 @@
             <option value="contrastchange">Contrast Change</option>
             <option value="brightnesschange">Brightness Change</option>
             <option value="laplace">Laplace Filter</option>
+            <option value="binary">Image to binary</option>
         </select>
     </div>
     <button type="submit">Prześlij</button>
