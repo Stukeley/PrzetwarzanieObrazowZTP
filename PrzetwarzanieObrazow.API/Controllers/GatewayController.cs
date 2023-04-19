@@ -22,7 +22,7 @@ public class GatewayController : ControllerBase
 		{
 			var content = new StringContent(System.Text.Json.JsonSerializer.Serialize(obj), Encoding.UTF8, "application/json");
 			
-			var response = await client.PostAsync($"{Settings.ApplicationUrl}/api/algorithms/{algorithmName}", content);
+			var response = await client.PostAsync($"{Settings.Instance.ApplicationUrl}/api/algorithms/{algorithmName}", content);
 			
 			string result = await response.Content.ReadAsStringAsync();
 			
