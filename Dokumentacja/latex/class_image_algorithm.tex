@@ -1,0 +1,96 @@
+\hypertarget{class_image_algorithm}{}\doxysection{Image\+Algorithm Class Reference}
+\label{class_image_algorithm}\index{ImageAlgorithm@{ImageAlgorithm}}
+
+
+Klasa bazowa dla wszystkich algorytmów przetwarzania obrazu. Zawiera dane wejściowe, ich rozmiar oraz wyjściowe, a także wszystkie niezbędne do przetwarzania informacje.  
+
+
+Inheritance diagram for Image\+Algorithm\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.517615cm]{class_image_algorithm}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+abstract \mbox{\hyperlink{struct_pixel}{Pixel}}\mbox{[},\mbox{]} \mbox{\hyperlink{class_image_algorithm_ac8516367d0818d2b1903465cc09ff6b8}{Process}} ()
+\item 
+\mbox{\hyperlink{class_image_algorithm_a14af8c5779c95b7697dd5826989ee875}{Image\+Algorithm}} (\mbox{\hyperlink{struct_pixel}{Pixel}}\mbox{[},\mbox{]} input\+Image, int width, int height)
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_pixel}{Pixel}}\mbox{[},\mbox{]} \mbox{\hyperlink{class_image_algorithm_a124b81445c095dfa018b0bf624b8a57f}{Input\+Image}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+int \mbox{\hyperlink{class_image_algorithm_a7d9a982c739d08ee334c3713648d5a7d}{Width}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+int \mbox{\hyperlink{class_image_algorithm_a1375859a92e9c667d4e160d72bd03a46}{Height}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+\mbox{\hyperlink{struct_pixel}{Pixel}}\mbox{[},\mbox{]} \mbox{\hyperlink{class_image_algorithm_a8967d857476afc65c36dc10df0f0d208}{Output\+Image}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+\mbox{\hyperlink{interface_i_algorithm_mask}{IAlgorithm\+Mask}} \mbox{\hyperlink{class_image_algorithm_a8680461a24bdf1a143ef798d92fdf263}{Mask}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Klasa bazowa dla wszystkich algorytmów przetwarzania obrazu. Zawiera dane wejściowe, ich rozmiar oraz wyjściowe, a także wszystkie niezbędne do przetwarzania informacje. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_image_algorithm_a14af8c5779c95b7697dd5826989ee875}\label{class_image_algorithm_a14af8c5779c95b7697dd5826989ee875}} 
+\index{ImageAlgorithm@{ImageAlgorithm}!ImageAlgorithm@{ImageAlgorithm}}
+\index{ImageAlgorithm@{ImageAlgorithm}!ImageAlgorithm@{ImageAlgorithm}}
+\doxysubsubsection{\texorpdfstring{ImageAlgorithm()}{ImageAlgorithm()}}
+{\footnotesize\ttfamily Image\+Algorithm.\+Image\+Algorithm (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_pixel}{Pixel}}}]{input\+Image\mbox{[},\mbox{]},  }\item[{int}]{width,  }\item[{int}]{height }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_image_algorithm_ac8516367d0818d2b1903465cc09ff6b8}\label{class_image_algorithm_ac8516367d0818d2b1903465cc09ff6b8}} 
+\index{ImageAlgorithm@{ImageAlgorithm}!Process@{Process}}
+\index{Process@{Process}!ImageAlgorithm@{ImageAlgorithm}}
+\doxysubsubsection{\texorpdfstring{Process()}{Process()}}
+{\footnotesize\ttfamily abstract \mbox{\hyperlink{struct_pixel}{Pixel}}\mbox{[},\mbox{]} Image\+Algorithm.\+Process (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_brightness_change_a7880b12fdaa984bac6d5925c294fa88c}{Brightness\+Change}}, \mbox{\hyperlink{class_contrast_change_a81c1da95eb3dda5652aec149b0d786aa}{Contrast\+Change}}, \mbox{\hyperlink{class_grayscale_filter_aff8e7b076e0e1a663b87265ce70176f5}{Grayscale\+Filter}}, \mbox{\hyperlink{class_high_pass_filter_ac6096e2aae2bf63720e990cba5002de5}{High\+Pass\+Filter}}, \mbox{\hyperlink{class_image_to_binary_aa8bf28eac17d8849b255f86e1a5a09bb}{Image\+To\+Binary}}, and \mbox{\hyperlink{class_laplace_filter_ac1c933b1255511dab181a4019ddaf02c}{Laplace\+Filter}}.
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_image_algorithm_a1375859a92e9c667d4e160d72bd03a46}\label{class_image_algorithm_a1375859a92e9c667d4e160d72bd03a46}} 
+\index{ImageAlgorithm@{ImageAlgorithm}!Height@{Height}}
+\index{Height@{Height}!ImageAlgorithm@{ImageAlgorithm}}
+\doxysubsubsection{\texorpdfstring{Height}{Height}}
+{\footnotesize\ttfamily int Image\+Algorithm.\+Height\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+\mbox{\Hypertarget{class_image_algorithm_a124b81445c095dfa018b0bf624b8a57f}\label{class_image_algorithm_a124b81445c095dfa018b0bf624b8a57f}} 
+\index{ImageAlgorithm@{ImageAlgorithm}!InputImage@{InputImage}}
+\index{InputImage@{InputImage}!ImageAlgorithm@{ImageAlgorithm}}
+\doxysubsubsection{\texorpdfstring{InputImage}{InputImage}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_pixel}{Pixel}} \mbox{[},\mbox{]} Image\+Algorithm.\+Input\+Image\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+\mbox{\Hypertarget{class_image_algorithm_a8680461a24bdf1a143ef798d92fdf263}\label{class_image_algorithm_a8680461a24bdf1a143ef798d92fdf263}} 
+\index{ImageAlgorithm@{ImageAlgorithm}!Mask@{Mask}}
+\index{Mask@{Mask}!ImageAlgorithm@{ImageAlgorithm}}
+\doxysubsubsection{\texorpdfstring{Mask}{Mask}}
+{\footnotesize\ttfamily \mbox{\hyperlink{interface_i_algorithm_mask}{IAlgorithm\+Mask}} Image\+Algorithm.\+Mask\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+\mbox{\Hypertarget{class_image_algorithm_a8967d857476afc65c36dc10df0f0d208}\label{class_image_algorithm_a8967d857476afc65c36dc10df0f0d208}} 
+\index{ImageAlgorithm@{ImageAlgorithm}!OutputImage@{OutputImage}}
+\index{OutputImage@{OutputImage}!ImageAlgorithm@{ImageAlgorithm}}
+\doxysubsubsection{\texorpdfstring{OutputImage}{OutputImage}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_pixel}{Pixel}} \mbox{[},\mbox{]} Image\+Algorithm.\+Output\+Image\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+\mbox{\Hypertarget{class_image_algorithm_a7d9a982c739d08ee334c3713648d5a7d}\label{class_image_algorithm_a7d9a982c739d08ee334c3713648d5a7d}} 
+\index{ImageAlgorithm@{ImageAlgorithm}!Width@{Width}}
+\index{Width@{Width}!ImageAlgorithm@{ImageAlgorithm}}
+\doxysubsubsection{\texorpdfstring{Width}{Width}}
+{\footnotesize\ttfamily int Image\+Algorithm.\+Width\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Przetwarzanie\+Obrazow.\+Code/\+Algorithms/\mbox{\hyperlink{_image_algorithm_8cs}{Image\+Algorithm.\+cs}}\end{DoxyCompactItemize}

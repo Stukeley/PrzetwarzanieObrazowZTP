@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['ialgorithmmask_0',['IAlgorithmMask',['../interface_i_algorithm_mask.html',1,'']]],
+  ['ialgorithmmask_2ecs_1',['IAlgorithmMask.cs',['../_i_algorithm_mask_8cs.html',1,'']]],
+  ['if_2',['if',['../_przetwarzanie_obrazow_8_a_p_i_2_program_8cs.html#a79a944c7f0e25196ca3c5a8638b919b9',1,'if(app.Environment.IsDevelopment()):&#160;Program.cs'],['../_przetwarzanie_obrazow_8_web_2_program_8cs.html#af2d0c02efe3fbc2d94e5b6e316777c4d',1,'if(!app.Environment.IsDevelopment()):&#160;Program.cs']]],
+  ['imagealgorithm_3',['ImageAlgorithm',['../class_image_algorithm.html',1,'ImageAlgorithm'],['../class_image_algorithm.html#a14af8c5779c95b7697dd5826989ee875',1,'ImageAlgorithm.ImageAlgorithm()']]],
+  ['imagealgorithm_2ecs_4',['ImageAlgorithm.cs',['../_image_algorithm_8cs.html',1,'']]],
+  ['imagedataobject_5',['ImageDataObject',['../class_image_data_object.html',1,'']]],
+  ['imagedataobject_2ecs_6',['ImageDataObject.cs',['../_image_data_object_8cs.html',1,'']]],
+  ['imagefilterbuilder_7',['ImageFilterBuilder',['../class_image_filter_builder.html',1,'']]],
+  ['imagefilterbuilder_2ecs_8',['ImageFilterBuilder.cs',['../_image_filter_builder_8cs.html',1,'']]],
+  ['imageform_9',['ImageForm',['../class_image_form.html',1,'']]],
+  ['imageform_2ecshtml_2ecs_10',['ImageForm.cshtml.cs',['../_image_form_8cshtml_8cs.html',1,'']]],
+  ['imageresult_11',['ImageResult',['../class_result.html#a8cce17258a9744ed70f6a50f12907ba0',1,'Result']]],
+  ['imagetobinary_12',['ImageToBinary',['../class_image_to_binary.html',1,'ImageToBinary'],['../class_image_to_binary.html#ace6c687b227bac909146717024328538',1,'ImageToBinary.ImageToBinary()']]],
+  ['imagetobinary_2ecs_13',['ImageToBinary.cs',['../_image_to_binary_8cs.html',1,'']]],
+  ['index_2ecshtml_2ecs_14',['Index.cshtml.cs',['../_index_8cshtml_8cs.html',1,'']]],
+  ['indexmodel_15',['IndexModel',['../class_index_model.html',1,'IndexModel'],['../class_index_model.html#ae20482d341df57b5eb5e072ff465d72f',1,'IndexModel.IndexModel()']]],
+  ['inputimage_16',['InputImage',['../class_image_algorithm.html#a124b81445c095dfa018b0bf624b8a57f',1,'ImageAlgorithm']]],
+  ['instance_17',['Instance',['../class_settings.html#a183b5c675db41f443f08c3731192a22f',1,'Settings.Instance()'],['../class_serialization_helper.html#af444cc0c83a6a681cac15f7ddabb346f',1,'SerializationHelper.Instance()']]]
+];
