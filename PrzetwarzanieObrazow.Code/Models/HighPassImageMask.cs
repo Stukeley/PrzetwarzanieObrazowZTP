@@ -9,10 +9,12 @@ public class HighPassImageMask : IAlgorithmMask
 {
 	public int NetSize { get; set; }
 	public int[,] Mask { get; set; }
+	public int Sum { get; set; }
 
 	public HighPassImageMask()
 	{
 		NetSize = 3;
+		Sum = 1;
 
 		Mask = new int[NetSize, NetSize];
 		

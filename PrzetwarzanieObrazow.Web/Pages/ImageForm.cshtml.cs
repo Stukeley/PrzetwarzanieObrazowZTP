@@ -37,6 +37,9 @@ public class ImageForm : PageModel
 			Algorithm = algorithm
 		};
 		
+		// Kopiowanie danych z bitmapy do tablicy bajtów.
+		// [ R, G, B, R, G, B, R, G, B, ... ]
+		
 		var bmpdata = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
 		int numbytes = bmpdata.Width * bitmap.Height * 3;
 		byte[] bytedata = new byte[numbytes];
@@ -57,7 +60,7 @@ public class ImageForm : PageModel
 			var resultString = await response.Content.ReadAsStringAsync();
 			var resultParsed = System.Text.Json.JsonSerializer.Deserialize<ImageDataObject>(resultString);
 			
-			// Rekonstrukcja nagłówka.
+			// Rekonstrukcja bitmapy z tablicy bajtów - tak by utworzyć nagłówek - a następnie ponowna konwersja do tablicy bajtów.
 			var resultBitmap = new Bitmap(dto.Width,dto.Height,PixelFormat.Format24bppRgb);
 			var resultBmpData = resultBitmap.LockBits(new Rectangle(0, 0, dto.Width, dto.Height), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
 			var resultPtr = resultBmpData.Scan0;

@@ -6,10 +6,12 @@ public class LaplaceMask : IAlgorithmMask
 {
 	public int NetSize { get; set; }
 	public int[,] Mask { get; set; }
+	public int Sum { get; set; }
 
 	public LaplaceMask()
 	{
 		NetSize = 3;
+		Sum = 0;
 
 		Mask = new int[NetSize, NetSize];
 		

@@ -8,4 +8,5 @@ public interface IAlgorithmMask
 {
 	public int NetSize { get; set; }
 	public int[,] Mask { get; set; }
+	public int Sum { get; set; }
 }
