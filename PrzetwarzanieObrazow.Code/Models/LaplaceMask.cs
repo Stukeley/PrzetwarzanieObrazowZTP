@@ -2,6 +2,9 @@
 
 using Interfaces;
 
+/// <summary>
+/// Konkretna maska, używana w algorytmie Laplace.
+/// </summary>
 public class LaplaceMask : IAlgorithmMask
 {
 	public int NetSize { get; set; }
