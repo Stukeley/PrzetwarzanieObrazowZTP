@@ -22,15 +22,30 @@ public class BrightnessChange : ImageAlgorithm
 			for (int j = 0; j < Height; j++)
 			{
 				var pixel = InputImage[i, j];
-				
-				double redValue = Math.Clamp(pixel.R + addedBrightness, 0, 255);
-				double greenValue = Math.Clamp(pixel.G + addedBrightness, 0, 255);
-				double blueValue = Math.Clamp(pixel.B + addedBrightness, 0, 255);
-				
+
+				byte redValue = (pixel.R + addedBrightness) switch
+				{
+					> 255 => 255,
+					< 0 => 0,
+					_ => (byte)(pixel.R + addedBrightness)
+				};
+				byte greenValue = (pixel.G + addedBrightness) switch
+				{
+					> 255 => 255,
+					< 0 => 0,
+					_ => (byte)(pixel.G + addedBrightness)
+				};
+				byte blueValue = (pixel.B + addedBrightness) switch
+				{
+					> 255 => 255,
+					< 0 => 0,
+					_ => (byte)(pixel.B + addedBrightness)
+				};
+
 				OutputImage[i,j] = new Pixel(
-					(byte) (redValue),
-					(byte) (greenValue),
-					(byte) (blueValue)
+					redValue,
+					greenValue,
+					blueValue
 				);
 			}
 		}

@@ -21,20 +21,13 @@ public class GrayscaleFilter : ImageAlgorithm
 				var pixel = InputImage[i, j];
 			
 				int gray = (int)(0.299 * pixel.R + 0.587 * pixel.G + 0.114 * pixel.B);
-				byte grayByte;
 
-				switch (gray)
+				byte grayByte = gray switch
 				{
-					case > 255:
-						grayByte = 255;
-						break;
-					case < 0:
-						grayByte = 0;
-						break;
-					default:
-						grayByte = (byte)gray;
-						break;
-				}
+					> 255 => 255,
+					< 0 => 0,
+					_ => (byte)gray
+				};
 
 				OutputImage[i, j] = new Pixel(grayByte, grayByte, grayByte);
 			}
