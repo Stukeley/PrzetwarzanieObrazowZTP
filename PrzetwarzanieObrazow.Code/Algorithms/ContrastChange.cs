@@ -1,7 +1,7 @@
 ﻿namespace PrzetwarzanieObrazow.Code.Algorithms;
 
 using System;
-using System.Drawing;
+using Models;
 
 /// <summary>
 /// Algorytm zmieniający kontrast obrazu.
@@ -9,11 +9,11 @@ using System.Drawing;
 /// </summary>
 public class ContrastChange : ImageAlgorithm
 {
-	public ContrastChange(Bitmap inputImage, int width, int height) : base(inputImage, width, height)
+	public ContrastChange(Pixel[,] inputImage, int width, int height) : base(inputImage, width, height)
 	{
 	}
 
-	public override Bitmap Process()
+	public override Pixel[,] Process()
 	{
 		const double changedContrast = 1.5;
 		
@@ -21,13 +21,13 @@ public class ContrastChange : ImageAlgorithm
 		{
 			for (int j = 0; j < Height; j++)
 			{
-				var pixel = InputImage.GetPixel(i, j);
+				var pixel = InputImage[i, j];
 
 				double redValue = Math.Clamp((changedContrast * (pixel.R - 128) + 128), 0, 255);
 				double greenValue = Math.Clamp((changedContrast * (pixel.G - 128) + 128), 0, 255);
 				double blueValue = Math.Clamp((changedContrast * (pixel.B - 128) + 128), 0, 255);
 				
-				OutputImage.SetPixel(i, j, Color.FromArgb((byte)redValue, (byte)greenValue, (byte)blueValue));
+				OutputImage[i, j] = new Pixel((byte)redValue, (byte)greenValue, (byte)blueValue);
 			}
 		}
 

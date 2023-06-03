@@ -1,10 +1,8 @@
 ﻿namespace PrzetwarzanieObrazow.API.Controllers;
 
-using System.Drawing;
-using System.IO;
 using System.Threading.Tasks;
 using Code.Builders;
-using Code.Helpers;
+using Code.Models;
 using DTOs;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,12 +18,11 @@ public class AlgorithmsController : ControllerBase
 		{
 			return NoContent();
 		}
-
-		var bitmap = ImageDataToBitmap.ConvertImageDataToBitmap(obj);
-		var highPassAlgorithm = new ImageFilterBuilder().BuildHighPassFilterAlgorithm(bitmap);
+		
+		var highPassAlgorithm = new ImageFilterBuilder().BuildHighPassFilterAlgorithm(obj);
 		var output = highPassAlgorithm.Process();
 
-		string outputString = await ConvertAndReturnOutput(output, obj.Algorithm, output.Width, output.Height);
+		string outputString = await ConvertAndReturnOutput(output, obj.Algorithm, obj.Width, obj.Height);
 
 		return Ok(outputString);
 	}
@@ -39,11 +36,10 @@ public class AlgorithmsController : ControllerBase
 			return NoContent();
 		}
 
-		var bitmap = ImageDataToBitmap.ConvertImageDataToBitmap(obj);
-		var grayscaleAlgorithm = new ImageFilterBuilder().BuildGrayscaleFilterAlgorithm(bitmap);
+		var grayscaleAlgorithm = new ImageFilterBuilder().BuildGrayscaleFilterAlgorithm(obj);
 		var output = grayscaleAlgorithm.Process();
 
-		string outputString = await ConvertAndReturnOutput(output, obj.Algorithm, output.Width, output.Height);
+		string outputString = await ConvertAndReturnOutput(output, obj.Algorithm, obj.Width, obj.Height);
 
 		return Ok(outputString);
 	}
@@ -57,11 +53,10 @@ public class AlgorithmsController : ControllerBase
 			return NoContent();
 		}
 
-		var bitmap = ImageDataToBitmap.ConvertImageDataToBitmap(obj);
-		var grayscaleAlgorithm = new ImageFilterBuilder().BuildBrightnessChangeAlgorithm(bitmap);
+		var grayscaleAlgorithm = new ImageFilterBuilder().BuildBrightnessChangeAlgorithm(obj);
 		var output = grayscaleAlgorithm.Process();
 		
-		string outputString = await ConvertAndReturnOutput(output, obj.Algorithm, output.Width, output.Height);
+		string outputString = await ConvertAndReturnOutput(output, obj.Algorithm, obj.Width, obj.Height);
 
 		return Ok(outputString);
 	}
@@ -75,11 +70,10 @@ public class AlgorithmsController : ControllerBase
 			return NoContent();
 		}
 
-		var bitmap = ImageDataToBitmap.ConvertImageDataToBitmap(obj);
-		var grayscaleAlgorithm = new ImageFilterBuilder().BuildContrastChangeAlgorithm(bitmap);
+		var grayscaleAlgorithm = new ImageFilterBuilder().BuildContrastChangeAlgorithm(obj);
 		var output = grayscaleAlgorithm.Process();
 		
-		string outputString = await ConvertAndReturnOutput(output, obj.Algorithm, output.Width, output.Height);
+		string outputString = await ConvertAndReturnOutput(output, obj.Algorithm, obj.Width, obj.Height);
 
 		return Ok(outputString);
 	}
@@ -93,11 +87,10 @@ public class AlgorithmsController : ControllerBase
 			return NoContent();
 		}
 
-		var bitmap = ImageDataToBitmap.ConvertImageDataToBitmap(obj);
-		var grayscaleAlgorithm = new ImageFilterBuilder().BuildLaplaceFilterAlgorithm(bitmap);
+		var grayscaleAlgorithm = new ImageFilterBuilder().BuildLaplaceFilterAlgorithm(obj);
 		var output = grayscaleAlgorithm.Process();
 		
-		string outputString = await ConvertAndReturnOutput(output, obj.Algorithm, output.Width, output.Height);
+		string outputString = await ConvertAndReturnOutput(output, obj.Algorithm, obj.Width, obj.Height);
 
 		return Ok(outputString);
 	}
@@ -111,16 +104,15 @@ public class AlgorithmsController : ControllerBase
 			return NoContent();
 		}
 
-		var bitmap = ImageDataToBitmap.ConvertImageDataToBitmap(obj);
-		var grayscaleAlgorithm = new ImageFilterBuilder().BuildImageToBinaryAlgorithm(bitmap);
+		var grayscaleAlgorithm = new ImageFilterBuilder().BuildImageToBinaryAlgorithm(obj);
 		var output = grayscaleAlgorithm.Process();
 		
-		string outputString = await ConvertAndReturnOutput(output, obj.Algorithm, output.Width, output.Height);
+		string outputString = await ConvertAndReturnOutput(output, obj.Algorithm, obj.Width, obj.Height);
 
 		return Ok(outputString);
 	}
 
-	private static async Task<string> ConvertAndReturnOutput(Bitmap outputBitmap, string algorithm, int width, int height)
+	private static async Task<string> ConvertAndReturnOutput(Pixel[,] outputBytes, string algorithm, int width, int height)
 	{
 		var outputDto = new ImageDataObject()
 		{
@@ -128,11 +120,21 @@ public class AlgorithmsController : ControllerBase
 			Width = width,
 			Height = height
 		};
+
+		outputDto.Data = new byte[width * height * 3];
 		
-		using (var memoryStream = new MemoryStream())
+		int index = 0;
+
+		for (int y = 0; y < height; y++)
 		{
-			outputBitmap.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Png);
-			outputDto.Data = memoryStream.ToArray();
+			for (int x = 0; x < width; x++)
+			{
+				outputDto.Data[index] = outputBytes[x, y].R;
+				outputDto.Data[index + 1] = outputBytes[x, y].G;
+				outputDto.Data[index + 2] = outputBytes[x, y].B;
+
+				index += 3;
+			}
 		}
 
 		string outputString = System.Text.Json.JsonSerializer.Serialize(outputDto);

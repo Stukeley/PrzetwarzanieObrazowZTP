@@ -1,6 +1,6 @@
 ﻿namespace PrzetwarzanieObrazow.Code.Algorithms;
 
-using System.Drawing;
+using Models;
 
 /// <summary>
 /// Algorytm konwertujący obraz na obraz w skali szarości.
@@ -8,23 +8,35 @@ using System.Drawing;
 /// </summary>
 public class GrayscaleFilter : ImageAlgorithm
 {
-	public GrayscaleFilter(Bitmap inputImage, int width, int height) : base(inputImage, width, height)
+	public GrayscaleFilter(Pixel[,] inputImage, int width, int height) : base(inputImage, width, height)
 	{
 	}
 	
-	public override Bitmap Process()
+	public override Pixel[,] Process()
 	{
-		for (int i = 0; i < InputImage.Width; i++)
+		for (int i = 0; i < Width; i++)
 		{
-			for (int j = 0; j < InputImage.Height; j++)
+			for (int j = 0; j < Height; j++)
 			{
-				int r = InputImage.GetPixel(i, j).R;
-				int g = InputImage.GetPixel(i, j).G;
-				int b = InputImage.GetPixel(i, j).B;
+				var pixel = InputImage[i, j];
 			
-				int gray = (int)(0.299 * r + 0.587 * g + 0.114 * b);
+				int gray = (int)(0.299 * pixel.R + 0.587 * pixel.G + 0.114 * pixel.B);
+				byte grayByte;
 
-				OutputImage.SetPixel(i, j, Color.FromArgb(gray, gray, gray));
+				switch (gray)
+				{
+					case > 255:
+						grayByte = 255;
+						break;
+					case < 0:
+						grayByte = 0;
+						break;
+					default:
+						grayByte = (byte)gray;
+						break;
+				}
+
+				OutputImage[i, j] = new Pixel(grayByte, grayByte, grayByte);
 			}
 		}
 

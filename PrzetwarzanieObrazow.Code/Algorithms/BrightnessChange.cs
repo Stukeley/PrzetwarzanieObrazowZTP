@@ -1,7 +1,7 @@
 ﻿namespace PrzetwarzanieObrazow.Code.Algorithms;
 
 using System;
-using System.Drawing;
+using Models;
 
 /// <summary>
 /// Algorytm zmieniający jasność obrazu.
@@ -9,11 +9,11 @@ using System.Drawing;
 /// </summary>
 public class BrightnessChange : ImageAlgorithm
 {
-	public BrightnessChange(Bitmap inputImage, int width, int height) : base(inputImage, width, height)
+	public BrightnessChange(Pixel[,] inputImage, int width, int height) : base(inputImage, width, height)
 	{
 	}
 	
-	public override Bitmap Process()
+	public override Pixel[,] Process()
 	{
 		const int addedBrightness = 30;
 		
@@ -21,17 +21,17 @@ public class BrightnessChange : ImageAlgorithm
 		{
 			for (int j = 0; j < Height; j++)
 			{
-				var pixel = InputImage.GetPixel(i, j);
+				var pixel = InputImage[i, j];
 				
 				double redValue = Math.Clamp(pixel.R + addedBrightness, 0, 255);
 				double greenValue = Math.Clamp(pixel.G + addedBrightness, 0, 255);
 				double blueValue = Math.Clamp(pixel.B + addedBrightness, 0, 255);
 				
-				OutputImage.SetPixel(i, j, Color.FromArgb(
+				OutputImage[i,j] = new Pixel(
 					(byte) (redValue),
 					(byte) (greenValue),
 					(byte) (blueValue)
-				));
+				);
 			}
 		}
 

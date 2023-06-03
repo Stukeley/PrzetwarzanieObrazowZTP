@@ -1,7 +1,8 @@
 ﻿namespace PrzetwarzanieObrazow.Code.Builders;
 
-using System.Drawing;
 using Algorithms;
+using DTOs;
+using Helpers;
 using Models;
 
 /// <summary>
@@ -10,49 +11,49 @@ using Models;
 /// </summary>
 public class ImageFilterBuilder
 {
-	public ImageAlgorithm BuildHighPassFilterAlgorithm(Bitmap inputImage)
+	public ImageAlgorithm BuildHighPassFilterAlgorithm(ImageDataObject dto)
 	{
-		var highPassFilter = new HighPassFilter(inputImage, inputImage.Width, inputImage.Height);
+		var highPassFilter = new HighPassFilter(ByteArrayToPixels.ConvertImageDataToPixels(dto), dto.Width, dto.Height);
 		highPassFilter.Mask = new HighPassImageMask();
 		
 		return highPassFilter;
 	}
 	
-	public ImageAlgorithm BuildGrayscaleFilterAlgorithm(Bitmap inputImage)
+	public ImageAlgorithm BuildGrayscaleFilterAlgorithm(ImageDataObject dto)
 	{
-		var grayscaleFilter = new GrayscaleFilter(inputImage, inputImage.Width, inputImage.Height);
+		var grayscaleFilter = new GrayscaleFilter(ByteArrayToPixels.ConvertImageDataToPixels(dto), dto.Width, dto.Height);
 		grayscaleFilter.Mask = null;
 		
 		return grayscaleFilter;
 	}
 
-	public ImageAlgorithm BuildBrightnessChangeAlgorithm(Bitmap inputImage)
+	public ImageAlgorithm BuildBrightnessChangeAlgorithm(ImageDataObject dto)
 	{
-		var brightnessChange = new BrightnessChange(inputImage, inputImage.Width, inputImage.Height);
+		var brightnessChange = new BrightnessChange(ByteArrayToPixels.ConvertImageDataToPixels(dto), dto.Width, dto.Height);
 		brightnessChange.Mask = null;
 		
 		return brightnessChange;
 	}
 	
-	public ImageAlgorithm BuildContrastChangeAlgorithm(Bitmap inputImage)
+	public ImageAlgorithm BuildContrastChangeAlgorithm(ImageDataObject dto)
 	{
-		var contrastChange = new ContrastChange(inputImage, inputImage.Width, inputImage.Height);
+		var contrastChange = new ContrastChange(ByteArrayToPixels.ConvertImageDataToPixels(dto), dto.Width, dto.Height);
 		contrastChange.Mask = null;
 		
 		return contrastChange;
 	}
 	
-	public ImageAlgorithm BuildLaplaceFilterAlgorithm(Bitmap inputImage)
+	public ImageAlgorithm BuildLaplaceFilterAlgorithm(ImageDataObject dto)
 	{
-		var laplaceFilter = new LaplaceFilter(inputImage, inputImage.Width, inputImage.Height);
+		var laplaceFilter = new LaplaceFilter(ByteArrayToPixels.ConvertImageDataToPixels(dto), dto.Width, dto.Height);
 		laplaceFilter.Mask = new LaplaceMask();
 		
 		return laplaceFilter;
 	}
 
-	public ImageAlgorithm BuildImageToBinaryAlgorithm(Bitmap inputImage)
+	public ImageAlgorithm BuildImageToBinaryAlgorithm(ImageDataObject dto)
 	{
-		var imageToBinary = new ImageToBinary(inputImage, inputImage.Width, inputImage.Height);
+		var imageToBinary = new ImageToBinary(ByteArrayToPixels.ConvertImageDataToPixels(dto), dto.Width, dto.Height);
 		imageToBinary.Mask = null;
 		
 		return imageToBinary;

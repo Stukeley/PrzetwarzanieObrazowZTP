@@ -1,6 +1,6 @@
 ﻿namespace PrzetwarzanieObrazow.Code.Helpers;
 
-using System.Drawing;
+using DTOs;
 using Models;
 
 /// <summary>
@@ -8,27 +8,18 @@ using Models;
 /// </summary>
 public static class ByteArrayToPixels
 {
-	public static Pixel[] ConvertByteArrayToPixels(Bitmap inputImage)
+	public static Pixel[,] ConvertImageDataToPixels(ImageDataObject obj)
 	{
-		int width = inputImage.Width;
-		int height = inputImage.Height;
+		var pixels = new Pixel[obj.Width, obj.Height];
 
-		int size = width * height;
+		int index = 0;
 
-		var pixels = new Pixel[size];
-		
-		for (int i =0; i < height; i++)
+		for (int y = 0; y < obj.Height; y++)
 		{
-			for (int j = 0; j < width; j++)
+			for (int x = 0; x < obj.Width; x++)
 			{
-				var color = inputImage.GetPixel(j, i);
-				
-				pixels[i * width + j] = new Pixel
-				{
-					R = color.R,
-					G = color.G,
-					B = color.B
-				};
+				pixels[x, y] = new Pixel(obj.Data[index], obj.Data[index+1], obj.Data[index+2]);
+				index += 3;
 			}
 		}
 

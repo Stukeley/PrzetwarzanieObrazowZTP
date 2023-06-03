@@ -3,8 +3,11 @@
 namespace PrzetwarzanieObrazow.Web.Pages;
 
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using DTOs;
@@ -34,11 +37,16 @@ public class ImageForm : PageModel
 			Algorithm = algorithm
 		};
 		
-		using (var memoryStream = new MemoryStream())
-		{
-			bitmap.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Png);
-			dto.Data = memoryStream.ToArray();
-		}
+		var bmpdata = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+		int numbytes = bmpdata.Width * bitmap.Height * 3;
+		byte[] bytedata = new byte[numbytes];
+		var ptr = bmpdata.Scan0;
+
+		Marshal.Copy(ptr, bytedata, 0, numbytes);
+
+		bitmap.UnlockBits(bmpdata);
+		
+		dto.Data = bytedata;
 
 		using (var client = new HttpClient())
 		{
@@ -48,6 +56,20 @@ public class ImageForm : PageModel
 			
 			var resultString = await response.Content.ReadAsStringAsync();
 			var resultParsed = System.Text.Json.JsonSerializer.Deserialize<ImageDataObject>(resultString);
+			
+			// Rekonstrukcja nagłówka.
+			var resultBitmap = new Bitmap(dto.Width,dto.Height,PixelFormat.Format24bppRgb);
+			var resultBmpData = resultBitmap.LockBits(new Rectangle(0, 0, dto.Width, dto.Height), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
+			var resultPtr = resultBmpData.Scan0;
+			Marshal.Copy(resultParsed.Data, 0, resultPtr, dto.Width * dto.Height * 3);
+			
+			resultBitmap.UnlockBits(resultBmpData);
+
+			using (var ms = new MemoryStream())
+			{
+				resultBitmap.Save(ms, ImageFormat.Png);
+				resultParsed.Data = ms.ToArray();
+			}
 			
 			Result.ImageResult = resultParsed;
 			return Redirect("/result");
