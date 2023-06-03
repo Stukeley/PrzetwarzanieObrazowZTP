@@ -15,6 +15,7 @@ public class ImageToBinary : ImageAlgorithm
 	public override Pixel[,] Process()
 	{
 		const double threshold = 0.50;
+		const int thresholdInt = (int)(threshold * 256);
 
 		for (int i = 0; i < Width; i++)
 		{
@@ -23,7 +24,7 @@ public class ImageToBinary : ImageAlgorithm
 				var pixel = InputImage[i,j];
 				var grayScale = (pixel.R + pixel.G + pixel.B) / 3;
 
-				if (grayScale > threshold * 256)
+				if (grayScale > thresholdInt)
 				{
 					OutputImage[i, j] = new Pixel(255, 255, 255);
 				}
