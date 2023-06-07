@@ -1,5 +1,5 @@
-Aktualizacja 12.04.2023:
+Aktualizacja 7.06.2023:
 
-- Poprawki interfejsu użytkownika
-- Dodano nowy algorytm i poprawka istniejących
-- Niewielkie zmiany w kodzie
+- Skończenie sprawozdania
+- Przebudowanie algorytmów na bardziej optymalne, optymalizacja czasowa i pamięciowa
+- Usunięcie typu Bitmap z projektu-serwera (API, Code) - operacja bezpośrednio na pikselach
